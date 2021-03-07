@@ -1,4 +1,5 @@
 import React from 'react';
+import { Layout } from '../src/components';
 
 // https://storybook.js.org/docs/react/writing-stories/parameters#global-parameters
 export const parameters = {
@@ -8,8 +9,10 @@ export const parameters = {
 
 export const decorators = [
   (Story) => (
-    <div style={{ padding: 40 }}>
-      <Story />
-    </div>
+    <Layout title="Storybook">
+      <div style={{ padding: 40 }}>
+        <Story />
+      </div>
+    </Layout>
   ),
 ];

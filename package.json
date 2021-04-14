@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "@headlessui/react": "^0.3.1",
+    "@react-aria/button": "^3.3.1",
     "@storybook/addon-a11y": "^6.1.21",
     "@storybook/addon-actions": "^6.1.21",
     "@storybook/addon-essentials": "^6.1.21",
@@ -36,6 +37,7 @@
     "@typescript-eslint/parser": "^4.16.1",
     "autoprefixer": "^9.8.6",
     "babel-eslint": "^10.1.0",
+    "clb": "^0.3.0",
     "eslint": "^7.21.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-jsx-a11y": "^6.4.1",

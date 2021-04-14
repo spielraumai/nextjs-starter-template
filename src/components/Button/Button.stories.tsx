@@ -9,11 +9,7 @@ export default {
 } as Meta;
 
 const Template: Story = () => (
-  <Button
-    onClick={() => alert('clicked')}
-    outlined={true}
-    label={'label'}
-  ></Button>
+  <Button onClick={() => alert('clicked')} label={'label'}></Button>
 );
 
 export const Primary = Template.bind({});

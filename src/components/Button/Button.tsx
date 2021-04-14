@@ -1,36 +1,57 @@
 import React from 'react';
+import { useButton } from '@react-aria/button';
+import type { AriaButtonProps } from '@react-types/button';
+import clb from 'clb';
 
-export type ButtonProps = {
+export type ButtonProps = AriaButtonProps & {
   /**
    * Label of the button
    */
-  label: string;
+  children: string | string[];
   /**
-   * Boolean value to define the button style
+   * Boolean value to define if button disabled
    */
-  outlined?: boolean;
+  isDisabled?: boolean;
   /**
    * Button click action
    */
-  onClick(): () => void;
+  onClick: () => void;
 };
 
-const BASE_BUTTON =
-  'rounded outline-none shadow py-3 px-12 font-normal uppercase tracking-wider text-lg';
-const CONTAINED_BUTTON = `${BASE_BUTTON} bg-teal-400 border border-teal-400 text-white`;
-const OUTLINED_BUTTON = `${BASE_BUTTON} border border-teal-400 text-teal-400`;
+const buttonClasses = clb({
+  base: 'inline-flex items-center border border-transparent',
+  variants: {
+    isDisabled: {
+      true: 'cursor-not-allowed',
+    },
+  },
+});
 
-export const Button = ({
-  onClick,
-  label = 'Some label',
-  outlined,
-}: ButtonProps) => {
+const getRel = (props) => {
+  if (props.target === '_blank') {
+    return (props.rel || '') + ' noopener noreferrer';
+  }
+
+  return props.rel;
+};
+
+export const Button = (props: ButtonProps): JSX.Element => {
+  const ref = React.useRef();
+  const { buttonProps } = useButton(props, ref);
+  const rel = getRel(props);
+  const Component = props.href ? 'a' : 'button';
+  const type = Component === 'button' ? props.type || 'button' : undefined;
+  const { label, isDisabled } = props;
+
   return (
-    <button
-      onClick={onClick}
-      className={outlined ? OUTLINED_BUTTON : CONTAINED_BUTTON}
+    <Component
+      {...buttonProps}
+      rel={rel}
+      type={type}
+      className={buttonClasses({ isDisabled })}
+      ref={ref}
     >
       <span>{label}</span>
-    </button>
+    </Component>
   );
 };

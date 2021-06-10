@@ -1,18 +1,24 @@
 import React from 'react';
-import { Layout } from '../src/components';
+import 'tailwindcss/tailwind.css';
+
+// nextjs image compatibility
+import * as nextImage from 'next/image';
+
+Object.defineProperty(nextImage, 'default', {
+  configurable: true,
+  value: (props) => <img {...props} />,
+});
 
 // https://storybook.js.org/docs/react/writing-stories/parameters#global-parameters
 export const parameters = {
   // https://storybook.js.org/docs/react/essentials/actions#automatically-matching-args
-  actions: { argTypesRegex: '^on.*' },
+  actions: { argTypesRegex: '^on[A-Z].*' },
 };
 
 export const decorators = [
   (Story) => (
-    <Layout title="Storybook">
-      <div style={{ padding: 40 }}>
-        <Story />
-      </div>
-    </Layout>
+    <div style={{ padding: 40 }}>
+      <Story />
+    </div>
   ),
 ];
